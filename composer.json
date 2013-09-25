@@ -1,0 +1,20 @@
+{
+    "name": "goez/field-system",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jace Ju",
+            "email": "jaceju@kkbox.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "Goez\\FieldSystem": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
