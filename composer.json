@@ -1,6 +1,6 @@
 {
-    "name": "goez/field-system",
-    "description": "",
+    "name": "goez/node-system",
+    "description": "Node System for CMS",
     "authors": [
         {
             "name": "Jace Ju",
@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Goez\\FieldSystem": "src/"
+            "Goez\\NodeSystem": "src/"
         }
     },
     "minimum-stability": "dev"
