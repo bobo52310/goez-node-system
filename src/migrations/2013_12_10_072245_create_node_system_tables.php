@@ -36,7 +36,7 @@ class CreateNodeSystemTables extends Migration
         // nodes: 實際存放 node 資料的表格，例如每篇文章的標題、描述、發佈時間等。
         Schema::create('nodes', function (Table $table) {
             $table->increments('id');
-            $table->integer('user_id', 10);
+            $table->integer('user_id');
             $table->string('type', 100);
             $table->string('title', 200)->nullable()->default(null);
             $table->string('summary', 200)->nullable()->default(null);
@@ -56,7 +56,7 @@ class CreateNodeSystemTables extends Migration
         });
 
         // node_tags: 標註 nodes 與 tags 的關係。
-        Schema::create('node_types', function (Table $table) {
+        Schema::create('node_tags', function (Table $table) {
             $table->increments('id');
             $table->integer('node_id'); // 對應到 nodes.id
             $table->integer('tag_id'); // 對應到 tags.id
