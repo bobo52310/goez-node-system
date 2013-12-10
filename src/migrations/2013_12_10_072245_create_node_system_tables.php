@@ -76,12 +76,12 @@ class CreateNodeSystemTables extends Migration
      */
     public function down()
     {
-        Schema::drop('fields');
-        Schema::drop('field_types');
-        Schema::drop('nodes');
-        Schema::drop('node_types');
-        Schema::drop('node_tags');
-        Schema::drop('tags');
+        Schema::drop('goez_fields');
+        Schema::drop('goez_field_types');
+        Schema::drop('goez_nodes');
+        Schema::drop('goez_node_types');
+        Schema::drop('goez_node_tags');
+        Schema::drop('goez_tags');
     }
 
 }
