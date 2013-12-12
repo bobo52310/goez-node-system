@@ -24,9 +24,9 @@ class CreateNodeSystemTables extends Migration
         $this->createFieldTypesTable();
         $this->createNodesTable();
         $this->createNodeTypesTable();
-        $this->createNodeFieldsTable();
-        $this->createNodeTagsTable();
         $this->createTagsTable();
+        $this->createNodeTagsTable();
+        $this->createNodeFieldsTable();
     }
 
     /**
@@ -36,13 +36,13 @@ class CreateNodeSystemTables extends Migration
      */
     public function down()
     {
-        Schema::drop('goez_fields');
-        Schema::drop('goez_field_types');
-        Schema::drop('goez_nodes');
-        Schema::drop('goez_node_types');
-        Schema::drop('goez_node_field_types');
-        Schema::drop('goez_node_tags');
-        Schema::drop('goez_tags');
+        Schema::drop(NodeFieldType::$tableName);
+        Schema::drop(NodeTag::$tableName);
+        Schema::drop(Tag::$tableName);
+        Schema::drop(Node::$tableName);
+        Schema::drop(NodeType::$tableName);
+        Schema::drop(Field::$tableName);
+        Schema::drop(FieldType::$tableName);
     }
 
     /**
