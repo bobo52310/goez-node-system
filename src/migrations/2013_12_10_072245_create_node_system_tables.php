@@ -71,8 +71,8 @@ class CreateNodeSystemTables extends Migration
             ),
             array(
                 'id' => 4,
-                'type' => '',
-                'name' => 'Link',
+                'type' => 'html',
+                'name' => 'HTML',
                 'description' => null,
             ),
         );
