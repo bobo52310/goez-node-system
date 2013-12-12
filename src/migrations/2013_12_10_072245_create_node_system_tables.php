@@ -2,6 +2,13 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint as Table;
+use Goez\NodeSystem\FieldType;
+use Goez\NodeSystem\Field;
+use Goez\NodeSystem\NodeType;
+use Goez\NodeSystem\Node;
+use Goez\NodeSystem\NodeFieldType;
+use Goez\NodeSystem\NodeTag;
+use Goez\NodeSystem\Tag;
 
 class CreateNodeSystemTables extends Migration
 {
@@ -43,12 +50,7 @@ class CreateNodeSystemTables extends Migration
      */
     protected function createFieldTypesTable()
     {
-        Schema::create('goez_field_types', function (Table $table) {
-            $table->increments('id');
-            $table->string('type', 100);
-            $table->string('name', 100);
-            $table->string('description', 200)->nullable()->default(null);
-        });
+        Schema::create(FieldType::$tableName, FieldType::getBlueprint());
 
         $types = array(
             array(
@@ -77,7 +79,7 @@ class CreateNodeSystemTables extends Migration
             ),
         );
 
-        DB::table('goez_field_types')->insert($types);
+        DB::table(FieldType::$tableName)->insert($types);
     }
 
     /**
@@ -86,15 +88,7 @@ class CreateNodeSystemTables extends Migration
      */
     protected function createFieldsTable()
     {
-        Schema::create('goez_fields', function (Table $table) {
-            $table->increments('id');
-            $table->integer('node_id');
-            $table->integer('type_id');
-            $table->text('body_value');
-            $table->datetime('deleted_at')->nullable();
-            $table->datetime('created_at');
-            $table->datetime('updated_at')->nullable();
-        });
+        Schema::create(Field::$tableName, Field::getBlueprint());
     }
 
     /**
@@ -102,17 +96,7 @@ class CreateNodeSystemTables extends Migration
      */
     protected function createNodesTable()
     {
-        Schema::create('goez_nodes', function (Table $table) {
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->string('type', 100);
-            $table->string('title', 200)->nullable()->default(null);
-            $table->string('summary', 200)->nullable()->default(null);
-            $table->datetime('published_at')->nullable();
-            $table->datetime('deleted_at')->nullable();
-            $table->datetime('created_at');
-            $table->datetime('updated_at')->nullable();
-        });
+        Schema::create(Node::$tableName, Node::getBlueprint());
     }
 
     /**
@@ -120,13 +104,7 @@ class CreateNodeSystemTables extends Migration
      */
     protected function createNodeTypesTable()
     {
-        Schema::create('goez_node_types', function (Table $table) {
-            $table->increments('id');
-            $table->string('type', 100); // Node 類型的英文名稱
-            $table->string('name', 100); // Node 類型的中文名稱
-            $table->string('description', 200)->nullable()->default(null); // 類型描述
-            $table->enum('has_title', array('y', 'n'))->default('y'); // 是否要在 form 上出現標題欄位
-        });
+        Schema::create(NodeType::$tableName, NodeType::getBlueprint());
     }
 
     /**
@@ -134,11 +112,7 @@ class CreateNodeSystemTables extends Migration
      */
     protected function createNodeFieldsTable()
     {
-        Schema::create('goez_node_field_types', function (Table $table) {
-            $table->increments('id');
-            $table->integer('node_id'); // 對應到 nodes.id
-            $table->integer('type_id'); // 對應到 field_types.id
-        });
+        Schema::create(NodeFieldType::$tableName, NodeFieldType::getBlueprint());
     }
 
     /**
@@ -146,11 +120,7 @@ class CreateNodeSystemTables extends Migration
      */
     protected function createNodeTagsTable()
     {
-        Schema::create('goez_node_tags', function (Table $table) {
-            $table->increments('id');
-            $table->integer('node_id'); // 對應到 nodes.id
-            $table->integer('tag_id'); // 對應到 tags.id
-        });
+        Schema::create(NodeTag::$tableName, NodeTag::getBlueprint());
     }
 
     /**
@@ -158,10 +128,7 @@ class CreateNodeSystemTables extends Migration
      */
     protected function createTagsTable()
     {
-        Schema::create('goez_tags', function (Table $table) {
-            $table->increments('id');
-            $table->string('name', 100); // 標籤名稱
-        });
+        Schema::create(Tag::$tableName, Tag::getBlueprint());
     }
 
 }
