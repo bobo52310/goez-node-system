@@ -9,12 +9,7 @@ use Goez\NodeSystem\FieldType;
 use Goez\NodeSystem\Field;
 use Goez\NodeSystem\NodeTag;
 use Goez\NodeSystem\Tag;
-use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Capsule\Manager as DB;
-use Illuminate\Database\Schema\Blueprint as Table;
-use Illuminate\Database\Schema\Builder;
-use Illuminate\Database\Schema\Grammars\MySqlGrammar;
-use Illuminate\Support\Facades\Schema;
 
 class NodeServiceTest extends \PHPUnit_Framework_TestCase
 {
