@@ -38,9 +38,7 @@ class NodeType extends Eloquent
      */
     public function saveFieldTypes($fieldTypes)
     {
-        NodeFieldType::query()
-            ->where('node_type_id', $this->id)
-            ->delete();
+        $this->fieldTypes()->detach();
 
         foreach ($fieldTypes as $fieldName => $fieldTypeId) {
             NodeFieldType::create(array(
@@ -56,7 +54,11 @@ class NodeType extends Eloquent
      */
     public function fieldTypes()
     {
-        return $this->belongsToMany('Goez\NodeSystem\FieldType', 'goez_node_field_types', 'node_type_id');
+        return $this->belongsToMany(
+                    'Goez\NodeSystem\FieldType',
+                    'goez_node_field_types',
+                    'node_type_id')
+                ->withPivot('name');
     }
 
 }
