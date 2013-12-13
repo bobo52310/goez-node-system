@@ -9,6 +9,7 @@ use Goez\NodeSystem\FieldType;
 use Goez\NodeSystem\Field;
 use Goez\NodeSystem\NodeTag;
 use Goez\NodeSystem\Tag;
+use Goez\NodeSystem\NodeService;
 use Illuminate\Database\Capsule\Manager as DB;
 
 class NodeServiceTest extends \PHPUnit_Framework_TestCase
@@ -75,11 +76,27 @@ class NodeServiceTest extends \PHPUnit_Framework_TestCase
             'type' => 'test',
             'description' => '',
             'has_title' => 'y',
+            'field_type' => array(
+                1, 2, 3, 4,
+            ),
+            'field_name' => array(
+                'My Text',
+                'My Image',
+                'My Link',
+                'My HTML',
+            ),
         );
 
-//        $nodeType = new NodeType($data);
-//        $id = $nodeType->save();
+        $this->assertTrue(NodeService::saveNodeType($data));
 
+        $nodeType = NodeService::findNodeByName('Test');
 
+        $query = NodeFieldType::query();
+        $result = $query->where('node_type_id', $nodeType->id)->lists('name', 'id');
+
+        $this->assertEquals('My Text', $result[1]);
+        $this->assertEquals('My Image', $result[2]);
+        $this->assertEquals('My Link', $result[3]);
+        $this->assertEquals('My HTML', $result[4]);
     }
 }
