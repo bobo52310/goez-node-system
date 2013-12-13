@@ -33,8 +33,22 @@ class NodeType extends Eloquent
         };
     }
 
+    /**
+     * @param $fieldTypes
+     */
     public function saveFieldTypes($fieldTypes)
     {
+        NodeFieldType::query()
+            ->where('node_type_id', $this->id)
+            ->delete();
 
+        foreach ($fieldTypes as $fieldTypeId => $fieldName) {
+            NodeFieldType::create(array(
+                'node_type_id' => $this->id,
+                'field_type_id' => $fieldTypeId,
+                'name' => $fieldName,
+            ));
+        }
     }
+
 }

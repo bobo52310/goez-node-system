@@ -32,18 +32,7 @@ class NodeService
 
         $nodeType->fill($input);
         $nodeType->save();
-
-        NodeFieldType::query()
-            ->where('node_type_id', $nodeType->id)
-            ->delete();
-
-        foreach ($fieldTypes as $fieldTypeId => $fieldName) {
-            NodeFieldType::create(array(
-                'node_type_id'  => $nodeType->id,
-                'field_type_id' => $fieldTypeId,
-                'name'          => $fieldName,
-            ));
-        }
+        $nodeType->saveFieldTypes($fieldTypes);
 
         return true;
     }
@@ -56,4 +45,6 @@ class NodeService
     {
         return NodeType::query()->where('name', $name)->first();
     }
+
+
 }
