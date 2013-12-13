@@ -93,7 +93,7 @@ class NodeServiceTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->assertTrue(NodeService::saveNodeType($data));
+        $this->assertInstanceOf('Goez\NodeSystem\NodeType', NodeService::saveNodeType($data));
 
         $nodeType = NodeService::findNodeTypeByName('Test');
 

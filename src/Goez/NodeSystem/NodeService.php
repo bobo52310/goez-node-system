@@ -34,7 +34,7 @@ class NodeService
         $nodeType->save();
         $nodeType->saveFieldTypes($fieldTypes);
 
-        return true;
+        return $nodeType;
     }
 
     /**
