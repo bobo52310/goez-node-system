@@ -12,13 +12,10 @@ class NodeService
      */
     public static function saveNodeType($input)
     {
-        if (isset($input['field_name'])) {
-            $fieldNames = $input['field_name'];
+        $fieldTypes = array();
+        if (isset($input['field_type']) && isset($input['field_name'])) {
+            $fieldTypes = array_combine($input['field_type'], $input['field_name']);
             unset($input['field_name']);
-        }
-
-        if (isset($input['field_type'])) {
-            $fieldTypes = $input['field_type'];
             unset($input['field_type']);
         }
 
@@ -40,12 +37,11 @@ class NodeService
             ->where('node_type_id', $nodeType->id)
             ->delete();
 
-        foreach ($fieldTypes as $key => $fieldTypeId) {
-            $name = $fieldNames[$key];
+        foreach ($fieldTypes as $fieldTypeId => $fieldName) {
             NodeFieldType::create(array(
                 'node_type_id'  => $nodeType->id,
                 'field_type_id' => $fieldTypeId,
-                'name'          => $name,
+                'name'          => $fieldName,
             ));
         }
 
