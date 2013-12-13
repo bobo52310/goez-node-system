@@ -41,7 +41,7 @@ class NodeService
      * @param $name
      * @return mixed
      */
-    public static function findNodeByName($name)
+    public static function findNodeTypeByName($name)
     {
         return NodeType::query()->where('name', $name)->first();
     }

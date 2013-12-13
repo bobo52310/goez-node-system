@@ -95,7 +95,7 @@ class NodeServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(NodeService::saveNodeType($data));
 
-        $nodeType = NodeService::findNodeByName('Test');
+        $nodeType = NodeService::findNodeTypeByName('Test');
 
         $query = NodeFieldType::query();
         $result = $query->where('node_type_id', $nodeType->id)->lists('name', 'id');
