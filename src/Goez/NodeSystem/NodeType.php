@@ -51,4 +51,12 @@ class NodeType extends Eloquent
         }
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function fieldTypes()
+    {
+        return $this->belongsToMany('Goez\NodeSystem\FieldType', 'goez_node_field_types', 'node_type_id');
+    }
+
 }
