@@ -42,7 +42,7 @@ class NodeType extends Eloquent
             ->where('node_type_id', $this->id)
             ->delete();
 
-        foreach ($fieldTypes as $fieldTypeId => $fieldName) {
+        foreach ($fieldTypes as $fieldName => $fieldTypeId) {
             NodeFieldType::create(array(
                 'node_type_id' => $this->id,
                 'field_type_id' => $fieldTypeId,

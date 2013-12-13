@@ -14,7 +14,7 @@ class NodeService
     {
         $fieldTypes = array();
         if (isset($input['field_type']) && isset($input['field_name'])) {
-            $fieldTypes = array_combine($input['field_type'], $input['field_name']);
+            $fieldTypes = array_combine($input['field_name'], $input['field_type']);
             unset($input['field_name']);
             unset($input['field_type']);
         }

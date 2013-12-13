@@ -23,9 +23,14 @@ class NodeServiceTest extends \PHPUnit_Framework_TestCase
     {
         static::$_db = new DB();
         static::$_db->addConnection(array(
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'kkbox_inc_testing',
+            'username'  => 'root',
+            'password'  => '123456',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
         ));
         static::$_db->setAsGlobal();
         static::$_db->bootEloquent();
@@ -77,13 +82,14 @@ class NodeServiceTest extends \PHPUnit_Framework_TestCase
             'description' => '',
             'has_title' => 'y',
             'field_type' => array(
-                1, 2, 3, 4,
+                1, 2, 3, 4, 1,
             ),
             'field_name' => array(
                 'My Text',
                 'My Image',
                 'My Link',
                 'My HTML',
+                'My Text 2',
             ),
         );
 
@@ -98,5 +104,6 @@ class NodeServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Image', $result[2]);
         $this->assertEquals('My Link', $result[3]);
         $this->assertEquals('My HTML', $result[4]);
+        $this->assertEquals('My Text 2', $result[5]);
     }
 }
