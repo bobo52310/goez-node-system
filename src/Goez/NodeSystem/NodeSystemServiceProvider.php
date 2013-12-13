@@ -21,7 +21,7 @@ class NodeSystemServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->package('goez/node-system');
     }
 
     /**
