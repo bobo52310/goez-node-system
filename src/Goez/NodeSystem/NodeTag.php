@@ -8,7 +8,9 @@ use Illuminate\Database\Schema\Blueprint as Table;
 class NodeTag extends Eloquent
 {
     public static $tableName = 'goez_node_tags';
+    public $timestamps = false;
     protected $table = 'goez_node_tags';
+    protected $guarded = array();
 
     /**
      * @return callable

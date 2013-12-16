@@ -44,7 +44,8 @@ class NodeType extends Eloquent
             NodeFieldType::create(array(
                 'node_type_id' => $this->id,
                 'field_type_id' => $fieldTypeId,
-                'name' => $fieldName,
+                'field_name' => $fieldName,
+                'display_name' => $fieldName,
             ));
         }
     }
@@ -58,7 +59,7 @@ class NodeType extends Eloquent
                     'Goez\NodeSystem\FieldType',
                     'goez_node_field_types',
                     'node_type_id')
-                ->withPivot('name');
+                ->withPivot('id', 'field_name', 'display_name');
     }
 
 }

@@ -21,7 +21,8 @@ class NodeFieldType extends Eloquent
             $table->increments('id');
             $table->integer('node_type_id'); // 對應到 nodes_types.id
             $table->integer('field_type_id'); // 對應到 field_types.id
-            $table->string('name', 100); // 欄位名稱
+            $table->string('display_name', 100); // 顯示名稱
+            $table->string('field_name', 50); // 欄位名稱
         };
     }
 }
