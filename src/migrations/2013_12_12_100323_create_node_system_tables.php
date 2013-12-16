@@ -55,27 +55,39 @@ class CreateNodeSystemTables extends Migration
         $types = array(
             array(
                 'id' => 1,
-                'type' => 'text',
-                'name' => 'Text',
-                'description' => null,
+                'type' => 'mixed',
+                'name' => 'Mixed',
+                'description' => 'Wrapper for mixed contents.',
             ),
             array(
                 'id' => 2,
-                'type' => 'image',
-                'name' => 'Image',
-                'description' => null,
+                'type' => 'text',
+                'name' => 'Text',
+                'description' => 'For single line text.',
             ),
             array(
                 'id' => 3,
-                'type' => 'link',
-                'name' => 'Link',
-                'description' => null,
+                'type' => 'textarea',
+                'name' => 'TextArea',
+                'description' => 'For multiple lines text.',
             ),
             array(
                 'id' => 4,
+                'type' => 'image',
+                'name' => 'Image',
+                'description' => 'Image upload.',
+            ),
+            array(
+                'id' => 5,
+                'type' => 'link',
+                'name' => 'Link',
+                'description' => 'For url link.',
+            ),
+            array(
+                'id' => 6,
                 'type' => 'html',
                 'name' => 'HTML',
-                'description' => null,
+                'description' => 'For rich content.',
             ),
         );
 
