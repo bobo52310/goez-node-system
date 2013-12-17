@@ -37,7 +37,7 @@ class Node extends Eloquent
 
 
             $table->index('user_id');
-            $table->index('type');
+            $table->index('node_type_id');
             $table->index('title');
             $table->index('start_at');
             $table->index(array('start_at', 'end_at'), 'during');
