@@ -67,6 +67,17 @@ class Node extends Eloquent
     }
 
     /**
+     * @return array
+     */
+    public function languagesList()
+    {
+        return NodeLanguage::query()
+            ->where('node_id', $this->id)
+            ->orderBy('id')
+            ->lists('language_name');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function languages()
