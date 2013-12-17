@@ -61,9 +61,9 @@ class CreateNodeSystemTables extends Migration
         $types = array(
             array(
                 'id' => 1,
-                'type' => 'mixed',
-                'name' => 'Mixed',
-                'description' => 'Wrapper for mixed contents.',
+                'type' => 'flexible',
+                'name' => 'Flexible',
+                'description' => 'Flexible wrapper for mixed contents.',
             ),
             array(
                 'id' => 2,
