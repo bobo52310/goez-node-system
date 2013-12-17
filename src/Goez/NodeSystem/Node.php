@@ -13,6 +13,9 @@ class Node extends Eloquent
     public static $rules = array(
         'title' => 'max:100|required',
         'user_id' => 'integer|required',
+        'start_at' => 'date_format:Y-m-d',
+        'end_at' => 'date_format:Y-m-d',
+        'publish_at' => 'date_format:Y-m-d',
     );
 
     /**
