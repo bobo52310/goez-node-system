@@ -9,6 +9,8 @@ use Goez\NodeSystem\Node;
 use Goez\NodeSystem\NodeFieldType;
 use Goez\NodeSystem\NodeTag;
 use Goez\NodeSystem\Tag;
+use Goez\NodeSystem\NodeLanguage;
+use Goez\NodeSystem\Language;
 
 class CreateNodeSystemTables extends Migration
 {
@@ -27,6 +29,8 @@ class CreateNodeSystemTables extends Migration
         $this->createTagsTable();
         $this->createNodeTagsTable();
         $this->createNodeFieldsTable();
+        $this->createLanguagesTable();
+        $this->createNodeLanguagesTable();
     }
 
     /**
@@ -36,6 +40,8 @@ class CreateNodeSystemTables extends Migration
      */
     public function down()
     {
+        Schema::drop(NodeLanguage::$tableName);
+        Schema::drop(Language::$tableName);
         Schema::drop(NodeFieldType::$tableName);
         Schema::drop(NodeTag::$tableName);
         Schema::drop(Tag::$tableName);
@@ -89,6 +95,12 @@ class CreateNodeSystemTables extends Migration
                 'name' => 'HTML',
                 'description' => 'For rich content.',
             ),
+            array(
+                'id' => 7,
+                'type' => 'calendar',
+                'name' => 'Calendar',
+                'description' => 'Date and time picker.',
+            ),
         );
 
         DB::table(FieldType::$tableName)->insert($types);
@@ -141,6 +153,52 @@ class CreateNodeSystemTables extends Migration
     protected function createTagsTable()
     {
         Schema::create(Tag::$tableName, Tag::getBlueprint());
+    }
+
+    /**
+     * node_tags: 標註 nodes 與 tags 的關係
+     */
+    protected function createNodeLanguagesTable()
+    {
+        Schema::create(NodeLanguage::$tableName, NodeLanguage::getBlueprint());
+    }
+
+    /**
+     * tags: 用以對 node 做分類的表格
+     */
+    protected function createLanguagesTable()
+    {
+        Schema::create(Language::$tableName, Language::getBlueprint());
+
+        $langs = array(
+            array(
+                'id' => 1,
+                'name' => 'zh-tw',
+                'display_name' => '繁體中文',
+            ),
+            array(
+                'id' => 2,
+                'name' => 'zh-cn',
+                'display_name' => '简体中文',
+            ),
+            array(
+                'id' => 3,
+                'name' => 'en',
+                'display_name' => 'English',
+            ),
+            array(
+                'id' => 4,
+                'name' => 'jp',
+                'display_name' => '日本語',
+            ),
+            array(
+                'id' => 5,
+                'name' => 'th',
+                'display_name' => 'ภาษาไทย',
+            ),
+        );
+
+        DB::table(Language::$tableName)->insert($langs);
     }
 
 }
