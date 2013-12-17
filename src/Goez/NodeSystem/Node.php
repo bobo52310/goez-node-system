@@ -26,6 +26,8 @@ class Node extends Eloquent
             $table->string('type', 100);
             $table->string('title', 200)->nullable()->default(null);
             $table->string('summary', 200)->nullable()->default(null);
+            $table->datetime('start_at')->nullable();
+            $table->datetime('end_at')->nullable();
             $table->datetime('published_at')->nullable();
             $table->datetime('deleted_at')->nullable();
             $table->datetime('created_at');
