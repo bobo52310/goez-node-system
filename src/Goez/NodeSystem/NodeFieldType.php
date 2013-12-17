@@ -24,7 +24,7 @@ class NodeFieldType extends Eloquent
             $table->string('display_name', 100); // 顯示名稱
             $table->string('field_name', 50); // 欄位名稱
 
-            $table->index(array('node_type_id', 'field_type_id'), 'pivot');
+            $table->index(array('node_type_id', 'field_type_id'), 'goez_node_field_types_pivot');
         };
     }
 }

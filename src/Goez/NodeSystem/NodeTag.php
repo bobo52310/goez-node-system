@@ -22,7 +22,7 @@ class NodeTag extends Eloquent
             $table->integer('node_id'); // 對應到 nodes.id
             $table->integer('tag_id'); // 對應到 tags.id
 
-            $table->index(array('node_id', 'tag_id'), 'pivot');
+            $table->index(array('node_id', 'tag_id'), 'goez_node_tags_pivot');
         };
     }
 }
