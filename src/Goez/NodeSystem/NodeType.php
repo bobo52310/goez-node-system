@@ -40,13 +40,9 @@ class NodeType extends Eloquent
     {
         $this->fieldTypes()->detach();
 
-        foreach ($fieldTypes as $fieldName => $fieldTypeId) {
-            NodeFieldType::create(array(
-                'node_type_id' => $this->id,
-                'field_type_id' => $fieldTypeId,
-                'field_name' => $fieldName,
-                'display_name' => $fieldName,
-            ));
+        foreach ($fieldTypes as $field) {
+            $field['node_type_id'] = $this->id;
+            NodeFieldType::create($field);
         }
     }
 

@@ -13,8 +13,21 @@ class NodeService
     public static function saveNodeType($input)
     {
         $fieldTypes = array();
-        if (isset($input['field_type']) && isset($input['field_name'])) {
-            $fieldTypes = array_combine($input['field_name'], $input['field_type']);
+        if (isset($input['field_type'])
+                && isset($input['field_name'])
+                && isset($input['display_name'])) {
+
+            $fieldNames = $input['field_name'];
+            $displayNames = $input['display_name'];
+            foreach ($input['field_type'] as $key => $fieldTypeId) {
+                $fieldTypes[] = array(
+                    'field_type_id' => $fieldTypeId,
+                    'field_name'    => $fieldNames[$key],
+                    'display_name'  => $displayNames[$key],
+                );
+            }
+
+            unset($input['display_name']);
             unset($input['field_name']);
             unset($input['field_type']);
         }
