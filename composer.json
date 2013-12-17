@@ -17,7 +17,8 @@
     },
     "autoload": {
         "classmap": [
-            "src/migrations"
+            "src/migrations",
+            "tests/NodeSystemTest/TestCase.php"
         ],
         "psr-0": {
             "Goez\\NodeSystem": "src/",
