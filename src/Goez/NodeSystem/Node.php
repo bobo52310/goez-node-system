@@ -27,8 +27,8 @@ class Node extends Eloquent
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('node_type_id');
-            $table->string('title', 200)->nullable()->default(null);
-            $table->string('summary', 200)->nullable()->default(null);
+            $table->string('title', 250)->nullable()->default(null);
+            $table->text('summary')->nullable()->default(null);
             $table->timestamp('start_at')->nullable();
             $table->timestamp('end_at')->nullable();
             $table->timestamp('published_at')->nullable();
