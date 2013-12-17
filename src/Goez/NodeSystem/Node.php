@@ -64,4 +64,15 @@ class Node extends Eloquent
             'node_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function languages()
+    {
+        return $this->belongsToMany(
+            'Goez\NodeSystem\Language',
+            'goez_node_languages',
+            'node_id');
+    }
+
 }
