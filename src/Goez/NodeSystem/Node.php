@@ -26,7 +26,7 @@ class Node extends Eloquent
         return function (Table $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('type', 50);
+            $table->integer('node_type_id');
             $table->string('title', 200)->nullable()->default(null);
             $table->string('summary', 200)->nullable()->default(null);
             $table->datetime('start_at')->nullable();
