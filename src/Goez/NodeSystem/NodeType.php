@@ -8,16 +8,15 @@ use Illuminate\Database\Schema\Blueprint as Table;
 class NodeType extends Eloquent
 {
     public static $tableName = 'goez_node_types';
-    protected $table = 'goez_node_types';
-    public $timestamps = false;
-    protected $guarded = array();
-
     public static $rules = array(
         'name' => 'max:100|required',
         'type' => 'max:100|required',
         'description' => 'max:200',
         'has_title' => 'in:y,n',
     );
+    public $timestamps = false;
+    protected $table = 'goez_node_types';
+    protected $guarded = array();
 
     /**
      * @return callable

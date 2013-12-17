@@ -8,6 +8,7 @@ use Illuminate\Database\Schema\Blueprint as Table;
 class Language extends Eloquent
 {
     public static $tableName = 'goez_languages';
+    public $timestamps = false;
     protected $table = 'goez_languages';
     protected $guarded = array();
 

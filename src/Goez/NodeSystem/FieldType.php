@@ -8,7 +8,9 @@ use Illuminate\Database\Schema\Blueprint as Table;
 class FieldType extends Eloquent
 {
     public static $tableName = 'goez_field_types';
+    public $timestamps = false;
     protected $table = 'goez_field_types';
+    protected $guarded = false;
 
     /**
      * @return callable
