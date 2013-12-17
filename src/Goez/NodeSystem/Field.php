@@ -19,6 +19,7 @@ class Field extends Eloquent
         return function (Table $table) {
             $table->increments('id');
             $table->integer('node_id');
+            $table->integer('parent_id')->nullable();
             $table->string('field_name', 50);
             $table->text('body_value');
             $table->integer('sort_order')->default(10);
