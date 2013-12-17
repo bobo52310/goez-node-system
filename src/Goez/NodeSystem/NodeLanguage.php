@@ -21,6 +21,9 @@ class NodeLanguage extends Eloquent
             $table->increments('id');
             $table->integer('node_id'); // 對應到 nodes.id
             $table->string('language_name', 10); // 對應到 languages.name
+
+            $table->index('node_id');
+            $table->index('language_name');
         };
     }
 }

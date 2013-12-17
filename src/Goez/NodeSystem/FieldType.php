@@ -20,6 +20,8 @@ class FieldType extends Eloquent
             $table->string('type', 100);
             $table->string('name', 100);
             $table->string('description', 200)->nullable()->default(null);
+
+            $table->index('type');
         };
     }
 }

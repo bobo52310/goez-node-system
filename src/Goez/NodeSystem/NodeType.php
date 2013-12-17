@@ -30,6 +30,8 @@ class NodeType extends Eloquent
             $table->string('name', 100); // Node 類型的中文名稱
             $table->string('description', 200)->nullable()->default(null); // 類型描述
             $table->enum('has_title', array('y', 'n'))->default('y'); // 是否要在 form 上出現標題欄位
+
+            $table->index('type');
         };
     }
 

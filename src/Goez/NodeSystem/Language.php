@@ -18,8 +18,10 @@ class Language extends Eloquent
     {
         return function (Table $table) {
             $table->increments('id');
-            $table->text('name', 10);
-            $table->text('display_name', 50);
+            $table->string('name', 10);
+            $table->string('display_name', 50);
+
+            $table->index('name');
         };
     }
 

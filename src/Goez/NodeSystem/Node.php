@@ -26,7 +26,7 @@ class Node extends Eloquent
         return function (Table $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('type', 100);
+            $table->string('type', 50);
             $table->string('title', 200)->nullable()->default(null);
             $table->string('summary', 200)->nullable()->default(null);
             $table->datetime('start_at')->nullable();
@@ -35,6 +35,15 @@ class Node extends Eloquent
             $table->datetime('deleted_at')->nullable();
             $table->datetime('created_at');
             $table->datetime('updated_at')->nullable();
+
+            $table->index('user_id');
+            $table->index('type');
+            $table->index('title');
+            $table->index('start_at');
+            $table->index(array('start_at', 'end_at'), 'during');
+            $table->index('published_at');
+            $table->index('created_at');
+
         };
     }
 

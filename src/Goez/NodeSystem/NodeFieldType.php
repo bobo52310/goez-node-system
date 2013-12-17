@@ -23,6 +23,8 @@ class NodeFieldType extends Eloquent
             $table->integer('field_type_id'); // 對應到 field_types.id
             $table->string('display_name', 100); // 顯示名稱
             $table->string('field_name', 50); // 欄位名稱
+
+            $table->index(array('node_type_id', 'field_type_id'), 'pivot');
         };
     }
 }

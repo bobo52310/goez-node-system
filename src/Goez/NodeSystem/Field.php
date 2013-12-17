@@ -19,11 +19,15 @@ class Field extends Eloquent
         return function (Table $table) {
             $table->increments('id');
             $table->integer('node_id');
-            $table->text('field_name', 50);
+            $table->string('field_name', 50);
             $table->text('body_value');
             $table->datetime('deleted_at')->nullable();
             $table->datetime('created_at');
             $table->datetime('updated_at')->nullable();
+
+            $table->index('node_id');
+            $table->index('field_name');
+            $table->index('created_at');
         };
     }
 }
