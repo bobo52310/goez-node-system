@@ -10,7 +10,7 @@ class NodeServiceTest extends TestCase
 
     public function testCreateNodeType()
     {
-        $data = array(
+        $nodeTypeData = array(
             'name' => 'Test',
             'type' => 'test',
             'description' => '',
@@ -34,7 +34,7 @@ class NodeServiceTest extends TestCase
             ),
         );
 
-        $this->assertInstanceOf('Goez\NodeSystem\NodeType', NodeService::saveNodeType($data));
+        $this->assertInstanceOf('Goez\NodeSystem\NodeType', NodeService::saveNodeType($nodeTypeData));
 
         $nodeType = NodeService::findNodeTypeByName('Test');
 
