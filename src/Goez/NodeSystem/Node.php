@@ -53,19 +53,22 @@ class Node extends Eloquent
     }
 
     /**
-     * @param array $attributes
+     * Set the array of model attributes. No checking is done.
+     *
+     * @param  array  $attributes
+     * @param  bool   $sync
+     * @return void
      */
-    public function __construct($attributes = array())
+    public function setRawAttributes(array $attributes, $sync = false)
     {
-        parent::__construct($attributes);
+        parent::setRawAttributes($attributes, $sync);
         $this->fieldList = $this->fieldsList();
     }
 
     /**
-     * @param bool $force
      * @return array
      */
-    public function fieldsList($force = false)
+    public function fieldsList()
     {
         return Field::query()->where('node_id', $this->id)
             ->orderBy('id')
