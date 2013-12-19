@@ -19,6 +19,11 @@ class Node extends Eloquent
     );
 
     /**
+     * @var array
+     */
+    protected $fieldList = array();
+
+    /**
      * @return callable
      */
     public static function getBlueprint()
@@ -48,13 +53,23 @@ class Node extends Eloquent
     }
 
     /**
+     * @param array $attributes
+     */
+    public function __construct($attributes = array())
+    {
+        parent::__construct($attributes);
+        $this->fieldList = $this->fieldsList();
+    }
+
+    /**
+     * @param bool $force
      * @return array
      */
-    public function fieldsList()
+    public function fieldsList($force = false)
     {
         return Field::query()->where('node_id', $this->id)
-                             ->orderBy('id')
-                             ->lists('body_value', 'field_name');
+            ->orderBy('id')
+            ->lists('body_value', 'field_name');
     }
 
     /**
@@ -98,6 +113,17 @@ class Node extends Eloquent
             'Goez\NodeSystem\Language',
             'goez_node_languages',
             'node_id');
+    }
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        return isset($this->fieldList[$key])
+             ? $this->fieldList[$key]
+             : parent::__get($key);
     }
 
 }
