@@ -51,12 +51,12 @@ class NodeService
     }
 
     /**
-     * @param $name
+     * @param $type
      * @return mixed
      */
-    public static function findNodeTypeByName($name)
+    public static function findNodeType($type)
     {
-        return NodeType::query()->where('name', $name)->first();
+        return NodeType::query()->where('type', $type)->first();
     }
 
 
