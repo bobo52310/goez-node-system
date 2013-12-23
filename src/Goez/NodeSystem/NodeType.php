@@ -59,4 +59,12 @@ class NodeType extends Eloquent
                 ->withPivot('id', 'field_name', 'display_name');
     }
 
+    /**
+     * @return bool
+     */
+    public function hasTitle()
+    {
+        return $this->has_title === 'y';
+    }
+
 }
