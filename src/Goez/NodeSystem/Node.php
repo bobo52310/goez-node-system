@@ -11,7 +11,7 @@ class Node extends Eloquent
     protected $table = 'goez_nodes';
     protected $guarded = array();
     public static $rules = array(
-        'title' => 'max:100|required',
+        'title' => 'max:100',
         'user_id' => 'integer|required',
         'start_at' => 'date_format:Y-m-d',
         'end_at' => 'date_format:Y-m-d',
