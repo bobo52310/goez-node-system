@@ -129,4 +129,42 @@ class Node extends Eloquent
              : parent::__get($key);
     }
 
+    /**
+     * @param $fields
+     */
+    public function saveFields($fields)
+    {
+        foreach ($fields as $fieldName => $fieldValue) {
+            $field = Field::query()->where('node_id', $this->id)
+                ->where('field_name', $fieldName)
+                ->first();
+
+            if (null === $field) {
+                $fieldData = array(
+                    'node_id'    => $this->id,
+                    'field_name' => $fieldName,
+                    'body_value' => $fieldValue,
+                );
+                Field::create($fieldData);
+            } else {
+                $field->body_value = $fieldValue;
+                $field->save();
+            }
+        }
+    }
+
+    /**
+     * @param $langs
+     */
+    public function saveLanguages($langs)
+    {
+        $this->languages()->detach();
+
+        foreach ($langs as $lang) {
+            NodeLanguage::create(array(
+                'node_id' => $this->id,
+                'language_name'  => $lang,
+            ));
+        }
+    }
 }
