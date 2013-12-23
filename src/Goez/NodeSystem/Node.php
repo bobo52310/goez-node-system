@@ -129,4 +129,12 @@ class Node extends Eloquent
              : parent::__get($key);
     }
 
+    /**
+     * @return bool
+     */
+    public function hasTitle()
+    {
+        return $this->has_title === 'y';
+    }
+
 }
