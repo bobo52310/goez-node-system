@@ -54,9 +54,12 @@ class NodeType extends Eloquent
     {
         return $this->belongsToMany(
                     'Goez\NodeSystem\FieldType',
-                    'goez_node_field_types',
+                    NodeFieldType::$tableName,
                     'node_type_id')
-                ->withPivot('id', 'field_name', 'display_name');
+                ->withPivot('field_name', 'display_name')
+                ->select(FieldType::$tableName . '.*',
+                         NodeFieldType::$tableName . '.field_name',
+                         NodeFieldType::$tableName . '.display_name');
     }
 
     /**
