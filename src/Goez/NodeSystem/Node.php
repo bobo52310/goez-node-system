@@ -92,7 +92,7 @@ class Node extends Eloquent
     {
         return $this->belongsToMany(
             'Goez\NodeSystem\Tag',
-            'goez_node_tags',
+            NodeTag::$tableName,
             'node_id');
     }
 
@@ -114,7 +114,7 @@ class Node extends Eloquent
     {
         return $this->belongsToMany(
             'Goez\NodeSystem\Language',
-            'goez_node_languages',
+            NodeLanguage::$tableName,
             'node_id');
     }
 
