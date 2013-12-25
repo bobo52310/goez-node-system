@@ -66,6 +66,16 @@ class Node extends Eloquent
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function fields()
+    {
+        return $this->hasMany(
+            'Goez\NodeSystem\Field',
+            'node_id');
+    }
+
+    /**
      * @return array
      */
     public function fieldsList()
