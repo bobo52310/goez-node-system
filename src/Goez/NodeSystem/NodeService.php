@@ -14,28 +14,38 @@ class NodeService
     {
         $fieldTypes = array();
         if (isset($input['field_type'])
-                && isset($input['field_name'])
-                && isset($input['display_name'])) {
+            && isset($input['field_name'])
+            && isset($input['display_name'])
+            && isset($input['extra_settings'])
+            && isset($input['sort_order'])
+        ) {
 
-            $fieldNames = $input['field_name'];
-            $displayNames = $input['display_name'];
+            $fieldNames    = $input['field_name'];
+            $displayNames  = $input['display_name'];
+            $extraSettings = $input['extra_settings'];
+            $sortOrders    = $input['sort_order'];
+
             foreach ($input['field_type'] as $key => $fieldTypeId) {
                 $fieldTypes[] = array(
-                    'field_type_id' => $fieldTypeId,
-                    'field_name'    => $fieldNames[$key],
-                    'display_name'  => $displayNames[$key],
+                    'field_type_id'  => $fieldTypeId,
+                    'field_name'     => $fieldNames[$key],
+                    'display_name'   => $displayNames[$key],
+                    'extra_settings' => $extraSettings[$key],
+                    'sort_order'     => $sortOrders[$key],
                 );
             }
 
             unset($input['display_name']);
             unset($input['field_name']);
             unset($input['field_type']);
+            unset($input['extra_settings']);
+            unset($input['sort_order']);
         }
 
         $nodeType = null;
 
         if (isset($input['id'])) {
-            $id = $input['id'];
+            $id       = $input['id'];
             $nodeType = NodeType::find($id);
         }
 

@@ -32,11 +32,17 @@ class NodeServiceTest extends TestCase
                 'My HTML',
                 'My Text 2',
             ),
+            'extra_settings' => array(
+                '', '140x140', '', '', '',
+            ),
+            'sort_order' => array(
+                1, 2, 3, 4, 5,
+            ),
         );
 
         $this->assertInstanceOf('Goez\NodeSystem\NodeType', NodeService::saveNodeType($nodeTypeData));
 
-        $nodeType = NodeService::findNodeTypeByName('Test');
+        $nodeType = NodeService::findNodeType('test');
 
         $query = NodeFieldType::query();
         $result = $query->where('node_type_id', $nodeType->id)->lists('display_name', 'id');
