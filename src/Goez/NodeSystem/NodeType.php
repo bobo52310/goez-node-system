@@ -56,11 +56,13 @@ class NodeType extends Eloquent
                     'Goez\NodeSystem\FieldType',
                     NodeFieldType::$tableName,
                     'node_type_id')
-                ->withPivot('field_name', 'display_name')
+                ->withPivot('field_name', 'display_name', 'extra_settings', 'sort_order')
                 ->orderBy(NodeFieldType::$tableName . '.sort_order')
                 ->select(FieldType::$tableName . '.*',
                          NodeFieldType::$tableName . '.field_name',
-                         NodeFieldType::$tableName . '.display_name');
+                         NodeFieldType::$tableName . '.display_name',
+                         NodeFieldType::$tableName . '.extra_settings',
+                         NodeFieldType::$tableName . '.sort_order');
     }
 
     /**
