@@ -72,7 +72,8 @@ class Node extends Eloquent
     {
         return $this->hasMany(
             'Goez\NodeSystem\Field',
-            'node_id');
+            'node_id')
+            ->orderBy('sort_order');
     }
 
     /**
@@ -81,6 +82,7 @@ class Node extends Eloquent
     public function fieldsList()
     {
         return Field::query()->where('node_id', $this->id)
+            ->orderBy('sort_order')
             ->orderBy('id')
             ->lists('body_value', 'field_name');
     }

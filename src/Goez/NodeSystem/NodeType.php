@@ -57,6 +57,7 @@ class NodeType extends Eloquent
                     NodeFieldType::$tableName,
                     'node_type_id')
                 ->withPivot('field_name', 'display_name')
+                ->orderBy(NodeFieldType::$tableName . '.sort_order')
                 ->select(FieldType::$tableName . '.*',
                          NodeFieldType::$tableName . '.field_name',
                          NodeFieldType::$tableName . '.display_name');
