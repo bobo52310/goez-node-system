@@ -10,6 +10,7 @@ class Field extends Eloquent
     public static $tableName = 'goez_fields';
     protected $table = 'goez_fields';
     protected $guarded = array();
+    public $timestamps = false;
 
     /**
      * @return callable
@@ -23,7 +24,8 @@ class Field extends Eloquent
             $table->string('field_name', 50);
             $table->text('body_value');
             $table->integer('sort_order')->default(10);
-            $table->timestamps();
+            $table->integer('created_at')->unsigned()->nullable();
+            $table->integer('updated_at')->unsigned()->nullable();
             $table->softDeletes();
 
             $table->index('node_id');
@@ -31,6 +33,12 @@ class Field extends Eloquent
             $table->index('sort_order');
             $table->index('created_at');
         };
+    }
+
+    public function getDates()
+    {
+        // Avoid to auto convert to date-time format.
+        return array();
     }
 }
 

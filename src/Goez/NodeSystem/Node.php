@@ -10,6 +10,7 @@ class Node extends Eloquent
     public static $tableName = 'goez_nodes';
     protected $table = 'goez_nodes';
     protected $guarded = array();
+    public $timestamps = false;
     public static $rules = array(
         'title' => 'max:100',
         'user_id' => 'integer|required',
@@ -34,10 +35,11 @@ class Node extends Eloquent
             $table->integer('node_type_id');
             $table->string('title', 250)->nullable()->default(null);
             $table->text('summary')->nullable()->default(null);
-            $table->timestamp('start_at')->nullable();
-            $table->timestamp('end_at')->nullable();
-            $table->timestamp('published_at')->nullable();
-            $table->timestamps();
+            $table->integer('start_at')->unsigned()->nullable();
+            $table->integer('end_at')->unsigned()->nullable();
+            $table->integer('published_at')->unsigned()->nullable();
+            $table->integer('created_at')->unsigned()->nullable();
+            $table->integer('updated_at')->unsigned()->nullable();
             $table->softDeletes();
 
 
@@ -156,10 +158,12 @@ class Node extends Eloquent
                     'node_id'    => $this->id,
                     'field_name' => $fieldName,
                     'body_value' => $fieldValue,
+                    'created_at' => time(),
                 );
                 Field::create($fieldData);
             } else {
                 $field->body_value = $fieldValue;
+                $field->updated_at = time();
                 $field->save();
             }
         }
@@ -178,5 +182,11 @@ class Node extends Eloquent
                 'language_name'  => $lang,
             ));
         }
+    }
+
+    public function getDates()
+    {
+        // Avoid to auto convert to date-time format.
+        return array();
     }
 }
