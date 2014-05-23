@@ -189,4 +189,19 @@ class Node extends Eloquent
         // Avoid to auto convert to date-time format.
         return array();
     }
+
+    /**
+     * @param $nodeTypeName
+     * @param $colName
+     * @return array
+     */
+    public static function getNodeListByType($nodeTypeName, $colName)
+    {
+        $nodeType = NodeService::findNodeType($nodeTypeName);
+
+        return Node::query()->where('node_type_id', $nodeType->id)
+            ->orderBy('id')
+            ->lists($colName, 'id');
+    }
+
 }
