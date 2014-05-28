@@ -184,12 +184,6 @@ class Node extends Eloquent
         }
     }
 
-    public function getDates()
-    {
-        // Avoid to auto convert to date-time format.
-        return array();
-    }
-
     /**
      * @param $nodeTypeName
      * @param $colName
@@ -204,4 +198,20 @@ class Node extends Eloquent
             ->lists($colName, 'id');
     }
 
+    /**
+     * Avoid to auto convert to date-time format.
+     * @return int
+     */
+    public function freshTimestamp()
+    {
+        return time();
+    }
+
+    /**
+     * @return array
+     */
+    public function getDates()
+    {
+        return array();
+    }
 }
