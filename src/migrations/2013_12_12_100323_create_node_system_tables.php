@@ -11,6 +11,7 @@ use Goez\NodeSystem\NodeTag;
 use Goez\NodeSystem\Tag;
 use Goez\NodeSystem\NodeLanguage;
 use Goez\NodeSystem\Language;
+use Goez\NodeSystem\NodeGroup;
 
 class CreateNodeSystemTables extends Migration
 {
@@ -31,6 +32,7 @@ class CreateNodeSystemTables extends Migration
         $this->createNodeFieldsTable();
         $this->createLanguagesTable();
         $this->createNodeLanguagesTable();
+        $this->createNodeGroupTable();
     }
 
     /**
@@ -49,6 +51,7 @@ class CreateNodeSystemTables extends Migration
         Schema::drop(NodeType::$tableName);
         Schema::drop(Field::$tableName);
         Schema::drop(FieldType::$tableName);
+        Schema::drop(NodeGroup::$tableName);
     }
 
     /**
@@ -153,6 +156,11 @@ class CreateNodeSystemTables extends Migration
         );
 
         DB::table(Language::$tableName)->insert($langs);
+    }
+
+    protected function createNodeGroupTable()
+    {
+        Schema::create(NodeGroup::$tableName, NodeGroup::getBlueprint());
     }
 
 }
