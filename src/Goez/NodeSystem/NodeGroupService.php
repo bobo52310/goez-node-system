@@ -59,7 +59,7 @@ class NodeGroupService
         }
 
         $nodeGroups = [];
-        foreach ($nodeIds as $nodeId) {
+        foreach (array_unique($nodeIds) as $nodeId) {
             $nodeGroups[] = [
                 $this->getNodeIdColumn()  => $nodeId,
                 $this->getGroupIdColumn() => $groupId
