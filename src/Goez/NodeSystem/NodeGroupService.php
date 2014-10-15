@@ -23,6 +23,12 @@ class NodeGroupService
             return false;
         }
 
+        $nodeGroup = $this->findByNode($nodeId);
+
+        if (!empty($nodeGroup)) {
+            return true;
+        }
+
         return $nodeGroup = $this->nodeGroup->create([
             $this->getNodeIdColumn()  => $nodeId,
             $this->getGroupIdColumn() => $groupId
