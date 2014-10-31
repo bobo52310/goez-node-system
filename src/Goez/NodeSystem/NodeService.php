@@ -69,5 +69,76 @@ class NodeService
         return NodeType::query()->where('type', $type)->first();
     }
 
+    public static function getNodesByType($nodeTypeName, $grouped = false, $keyword = null, $lang = null)
+    {
+        $nodeT     = Node::$tableName;
+        $nodeLangT = NodeLanguage::$tableName;
+        $nodeType  = static::findNodeType($nodeTypeName);
 
+        $nodeGroup      = new NodeGroup;
+        $nodeGroupTable = $nodeGroup->getTable();
+        $nodeIdColumn   = $nodeGroup->getNodeIdColumn();
+        $groupIdColumn  = $nodeGroup->getGroupIdColumn();
+
+        $query = Node::query();
+
+        if ($grouped) {
+            $query->selectRaw("GROUP_CONCAT(DISTINCT $nodeT.id) as ids");
+            $query->groupBy($groupIdColumn);
+        }
+
+        $query->where("$nodeT.node_type_id", $nodeType->getKey());
+        $query->whereNull("$nodeGroupTable.$groupIdColumn", 'and', $grouped);
+
+        if (!empty($keyword)) {
+            $query->where(function ($query) use ($nodeT, $keyword) {
+                $query->where("$nodeT.title", 'LIKE', "%$keyword%");
+                if (is_numeric($keyword)) {
+                    $query->orWhere("$nodeT.id", (int) $keyword);
+                }
+            });
+        }
+
+        if (!empty($lang)) {
+            $query->where("$nodeLangT.language_name", $lang);
+        }
+
+        $query->leftJoin($nodeGroupTable, "$nodeGroupTable.$nodeIdColumn", '=', "$nodeT.id");
+        $query->join($nodeLangT, "$nodeLangT.node_id", '=', "$nodeT.id");
+
+        $query->addSelect([
+            "$nodeT.*",
+            "$nodeLangT.language_name",
+            "$nodeGroupTable.$groupIdColumn"
+        ]);
+
+        return $query;
+    }
+
+    public static function getByNodeIds(array $nodeIds)
+    {
+        $nodeT     = Node::$tableName;
+        $nodeLangT = NodeLanguage::$tableName;
+
+        $nodeGroup      = new NodeGroup;
+        $nodeGroupTable = $nodeGroup->getTable();
+        $nodeIdColumn   = $nodeGroup->getNodeIdColumn();
+        $groupIdColumn  = $nodeGroup->getGroupIdColumn();
+
+        $query = Node::query();
+
+        $query->whereIn("$nodeT.id", $nodeIds);
+        $query->orderBy("$nodeT.id", 'desc');
+
+        $query->leftJoin($nodeLangT, "$nodeLangT.node_id", '=', "$nodeT.id");
+        $query->leftJoin($nodeGroupTable, "$nodeGroupTable.$nodeIdColumn", '=', "$nodeT.id");
+
+        $query->addSelect([
+            "$nodeT.*",
+            "$nodeLangT.language_name",
+            "$nodeGroupTable.$groupIdColumn"
+        ]);
+
+        return $query;
+    }
 }
