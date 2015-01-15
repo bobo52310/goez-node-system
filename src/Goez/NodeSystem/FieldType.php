@@ -4,9 +4,12 @@ namespace Goez\NodeSystem;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Schema\Blueprint as Table;
+use ModelValidatingTrait;
 
 class FieldType extends Eloquent
 {
+    use ModelValidatingTrait;
+
     public static $tableName = 'goez_field_types';
     public static $types = array(
         array(
@@ -52,6 +55,11 @@ class FieldType extends Eloquent
             'description' => 'Date and time picker.',
         ),
     );
+    protected $rules = [
+        'type' => ['required', 'max:100'],
+        'name' => ['required', 'max:100'],
+        'description' => ['max:200']
+    ];
     public $timestamps = false;
     protected $table = 'goez_field_types';
     protected $guarded = false;

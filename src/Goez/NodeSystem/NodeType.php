@@ -4,16 +4,19 @@ namespace Goez\NodeSystem;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Schema\Blueprint as Table;
+use ModelValidatingTrait;
 
 class NodeType extends Eloquent
 {
+    use ModelValidatingTrait;
+
     public static $tableName = 'goez_node_types';
-    public static $rules = array(
-        'name' => 'max:100|required',
-        'type' => 'max:100|required',
-        'description' => 'max:200',
-        'has_title' => 'in:y,n',
-    );
+    protected $rules = [
+        'type' => ['required', 'max:100'],
+        'name' => ['required', 'max:100'],
+        'description' => ['max:200'],
+        'has_title' => ['in:y,n']
+    ];
     public $timestamps = false;
     protected $table = 'goez_node_types';
     protected $guarded = array();

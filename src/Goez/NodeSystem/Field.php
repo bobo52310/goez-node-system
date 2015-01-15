@@ -4,10 +4,18 @@ namespace Goez\NodeSystem;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Schema\Blueprint as Table;
+use ModelValidatingTrait;
 
 class Field extends Eloquent
 {
+    use ModelValidatingTrait;
+
     public static $tableName = 'goez_fields';
+    protected $rules = [
+        'node_id' => ['required'],
+        'field_name' => ['required', 'max:50'],
+        'body_value' => ['required']
+    ];
     protected $table = 'goez_fields';
     protected $guarded = array();
     public $timestamps = false;

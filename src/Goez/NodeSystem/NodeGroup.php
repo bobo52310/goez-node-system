@@ -4,10 +4,17 @@ namespace Goez\NodeSystem;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Schema\Blueprint as Table;
+use ModelValidatingTrait;
 
 class NodeGroup extends Eloquent
 {
+    use ModelValidatingTrait;
+
     public static $tableName = 'goez_node_groups';
+    protected $rules = [
+        'node_id' => ['required'],
+        'group_id' => ['required']
+    ];
     public $timestamps = false;
     protected $table = 'goez_node_groups';
     protected $guarded = array();

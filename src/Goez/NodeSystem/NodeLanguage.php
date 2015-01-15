@@ -4,10 +4,17 @@ namespace Goez\NodeSystem;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Schema\Blueprint as Table;
+use ModelValidatingTrait;
 
 class NodeLanguage extends Eloquent
 {
+    use ModelValidatingTrait;
+
     public static $tableName = 'goez_node_languages';
+    protected $rules = [
+        'node_id' => ['required'],
+        'language_name' => ['required', 'max:10']
+    ];
     public $timestamps = false;
     protected $table = 'goez_node_languages';
     protected $guarded = array();
