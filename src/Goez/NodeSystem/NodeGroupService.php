@@ -17,6 +17,9 @@ class NodeGroupService
         $this->nodeLanguage = $nodeLanguage;
     }
 
+    /**
+     * @return bool|\Illuminate\Database\Eloquent\Model
+     */
     public function create($nodeId, $groupId)
     {
         if ($this->languageDuplicate([$nodeId], $groupId)) {
@@ -26,7 +29,7 @@ class NodeGroupService
         $nodeGroup = $this->findByNode($nodeId);
 
         if (!empty($nodeGroup)) {
-            return true;
+            return $nodeGroup;
         }
 
         return $nodeGroup = $this->nodeGroup->create([
@@ -35,6 +38,9 @@ class NodeGroupService
         ]);
     }
 
+    /**
+     * @return bool|\Illuminate\Database\Eloquent\Model
+     */
     public function update($nodeId, $groupId)
     {
         if ($this->languageDuplicate([$nodeId], $groupId)) {
@@ -47,11 +53,16 @@ class NodeGroupService
             return false;
         }
 
-        return $nodeGroup->update([
+        $nodeGroup->update([
             $this->getGroupIdColumn() => $groupId
         ]);
+
+        return $nodeGroup;
     }
 
+    /**
+     * @return bool
+     */
     public function batchCreate(array $nodeIds, $groupId)
     {
         if ($this->languageDuplicate($nodeIds, $groupId)) {

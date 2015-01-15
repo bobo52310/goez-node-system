@@ -53,9 +53,9 @@ class NodeService
             $nodeType = new NodeType();
         }
 
-        $nodeType->fill($input);
-        $nodeType->save();
-        $nodeType->saveFieldTypes($fieldTypes);
+        if ($nodeType->fill($input)->save()) {
+            $nodeType->saveFieldTypes($fieldTypes);
+        }
 
         return $nodeType;
     }
