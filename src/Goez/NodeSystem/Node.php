@@ -17,10 +17,7 @@ class Node extends Eloquent
     protected $rules = [
         'user_id' => ['required'],
         'node_type_id' => ['required'],
-        'title' => ['max:250'],
-        'start_at' => ['date_format:Y-m-d'],
-        'end_at' => ['date_format:Y-m-d'],
-        'published_at' => ['date_format:Y-m-d']
+        'title' => ['max:250']
     ];
 
     /**
